@@ -150,8 +150,11 @@ def main():
         elif response.get("errorCode") == "User_Not_Chance":
             print(f"第{i}次抽奖失败,次数不足")
         else:
-            print(response)
-            print(f'第{i}次抽奖成功,抽奖获得{response.get("prizeName")}')
+            prize_name = response.get("prizeName")
+            if not prize_name:
+                print(f"第{i}次抽奖失败: {response}")
+            else:
+                print(f'第{i}次抽奖成功,抽奖获得{prize_name}')
 
 
 def lambda_handler(event, context):  # aws default
